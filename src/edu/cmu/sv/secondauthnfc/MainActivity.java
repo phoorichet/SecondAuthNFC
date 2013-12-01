@@ -11,9 +11,7 @@ import org.ndeftools.externaltype.ExternalTypeRecord;
 import org.ndeftools.externaltype.GenericExternalTypeRecord;
 import org.ndeftools.wellknown.TextRecord;
 
-import android.nfc.FormatException;
 import android.nfc.NdefMessage;
-import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcAdapter.CreateNdefMessageCallback;
 import android.nfc.NfcAdapter.OnNdefPushCompleteCallback;
@@ -93,8 +91,7 @@ public class MainActivity extends Activity implements
 			Log.d(TAG, "Maximum tag size is " + ndef.getMaxSize());
 
 
-			Parcelable[] messages = intent
-					.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
+			Parcelable[] messages = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
 			if (messages != null) {
 				
 				Log.d(TAG, "Found " + messages.length + " NDEF messages"); // is
@@ -140,21 +137,21 @@ public class MainActivity extends Activity implements
 			// ignore
 		}
 
-		// Test write NFC tags
-		Message composedMessage = composeMessage("Mother Fucker!!!");
-		NdefMessage composedMessageNdefMessage = composedMessage.getNdefMessage();
-
-		if (write(composedMessageNdefMessage, intent)) {
-			Log.d(TAG, "Write success!");
-
-			TextView textView = (TextView) findViewById(R.id.title);
-			textView.setText("Write success!");
-		} else {
-			Log.d(TAG, "Write failure!");
-
-			TextView textView = (TextView) findViewById(R.id.title);
-			textView.setText("Write failure!");
-		}
+//		// Test write NFC tags
+//		Message composedMessage = composeMessage("Mother Fucker!!!");
+//		NdefMessage composedMessageNdefMessage = composedMessage.getNdefMessage();
+//
+//		if (write(composedMessageNdefMessage, intent)) {
+//			Log.d(TAG, "Write success!");
+//
+//			TextView textView = (TextView) findViewById(R.id.title);
+//			textView.setText("Write success!");
+//		} else {
+//			Log.d(TAG, "Write failure!");
+//
+//			TextView textView = (TextView) findViewById(R.id.title);
+//			textView.setText("Write failure!");
+//		}
 	}
 
 	public boolean write(NdefMessage rawMessage, Intent intent) {
@@ -267,6 +264,13 @@ public class MainActivity extends Activity implements
 	@Override
 	public void onNdefPushComplete(NfcEvent arg0) {
 		Log.d(TAG, "onNdefPushComplete");
+		
+		runOnUiThread(new Runnable() {
+            public void run() {
+                TextView textView = (TextView) findViewById(R.id.title);
+                textView.setText("Message beamed!");
+            }   
+        });
 
 		// A handler is needed to send messages to the activity when this
 		// callback occurs, because it happens from a binder thread
@@ -281,8 +285,7 @@ public class MainActivity extends Activity implements
 		Message message = new Message(); // ndeftools ndef message
 
 		// add an android application record
-		AndroidApplicationRecord aar = new AndroidApplicationRecord(
-				"com.helloworld.nfc");
+		AndroidApplicationRecord aar = new AndroidApplicationRecord("edu.cmu.sv.secondauthnfc");
 		message.add(aar);
 
 		// create external type record to be pushed

@@ -9,23 +9,29 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:text="@string/nfc_reading_instruction"
+        android:textSize="20sp" />
     
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/nfc_status_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/title" />
 
-    <TextView
+<!--     <TextView
         android:id="@+id/countNFCMessages"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/count_nfc_message" />
+        android:text="@string/count_nfc_message" /> -->
+
+    <TextView
+        android:id="@+id/NfcReaderTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </LinearLayout>

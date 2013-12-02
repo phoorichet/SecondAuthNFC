@@ -6,5 +6,13 @@
     <string name="hello_world">Hello world!</string>
     <string name="title">Looking for NFC tags</string>
     <string name="count_nfc_message">Found 0 Messages</string>
+    <string name="second_auth_name">Second Authentication</string>
+    <string name="nfc_reading_instruction">Please tab your employee card</string>
+    <string name="login_nfc_progress_signing_in">Loging In 2nd Auth</string>
+    <string name="nfc_auth_error_message">Error with 2nd Auth</string>
+    <string name="nfc_record_error_message">NFC record type unrecogized</string>
+    <string name="nfc_passcode_error_message">Passcode error</string>
+    <string name="title_activity_corp">CorpActivity</string>
+   	<string name="hello_corp">Welcome to our corp mobile app!</string>
 
 </resources>

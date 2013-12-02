@@ -27,12 +27,6 @@ import android.widget.TextView;
  * well.
  */
 public class LoginActivity extends Activity {
-	/**
-	 * A dummy authentication store containing known user names and passwords.
-	 * TODO: remove after connecting to a real authentication system.
-	 */
-	private static final String[] DUMMY_CREDENTIALS = new String[] {
-			"foo@example.com:hello", "bar@example.com:world" };
 
 	/**
 	 * The default email to populate the email field with.
@@ -56,7 +50,9 @@ public class LoginActivity extends Activity {
 	private TextView mLoginStatusMessageView;
 	
 	public static final String TAG = LoginActivity.class.getName();
-	public static final String CORP_AUTH_SERVER_URL = "http://192.168.1.140:4000/users/sign_in";
+	public static final String CORP_AUTH_SERVER_URL = "http://tfa-corp.herokuapp.com/users/sign_in";
+	
+	public static final String CORP_EMAIL = "edu.cmu.sv.secondauthnfc.CORP_EMAIL";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -223,7 +219,9 @@ public class LoginActivity extends Activity {
 			
 			// Valid response
 			if (!isInvalid){
+				Log.d(TAG, " ==> Launching Main Activity");
 				Intent launchSecondAuth = new Intent(getApplicationContext(), MainActivity.class);
+				launchSecondAuth.putExtra(CORP_EMAIL, mEmail);
 				startActivity(launchSecondAuth);
 				return true;
 			}
